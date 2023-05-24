@@ -1,0 +1,522 @@
+{
+	"info": {
+		"_postman_id": "bbaea9ca-17bf-4ac2-9b35-36843eb33a7c",
+		"name": "TİWETTER",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"username\": \"meltemaa\",\r\n    \"email\": \"alli@gmail.com\",\r\n    \"passhash\": \"12aa*\",\r\n    \"rolename\":\"admin\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9000/api/auth/register",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"username\": \"meltem\",\r\n    \"email\": \"meltem@gmail.com\",\r\n    \"passhash\": \"12aa*\",\r\n    \"rolename\":\"admin\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9000/api/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "usersAll",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZleXNlbCIsInJvbGVuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODEzNjczNzcsImV4cCI6MTY4MTQ1Mzc3N30.hZAmXTWcd2-SsE8aRR9EWZKvbnfjBVk75SCXh3pUSEU",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:9000/api/user/",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "usersgetID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNlcmhhdCIsInJvbGVuYW1lIjoidXNlciIsImlhdCI6MTY4MTM3NzM5NywiZXhwIjoxNjgxNDYzNzk3fQ.vci6w5o5moNGsuCrtlwtBcwPDkwt9UoYZe6X_9g5pp8",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9000/api/user/1",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "usersPut",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNlcmhhdCIsInJvbGVuYW1lIjoidXNlciIsImlhdCI6MTY4MTM3NzM5NywiZXhwIjoxNjgxNDYzNzk3fQ.vci6w5o5moNGsuCrtlwtBcwPDkwt9UoYZe6X_9g5pp8",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n    \"username\": \"serhat\",\r\n    \"email\": \"serhat@gmail.com\",\r\n    \"passhash\": \"12ab*\",\r\n    \"roleId\":\"2\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9000/api/user/2?&",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"user",
+								"2"
+							],
+							"query": [
+								{
+									"key": null,
+									"value": null
+								},
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "usersDelete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNlcmhhdCIsInJvbGVuYW1lIjoidXNlciIsImlhdCI6MTY4MTM3NzM5NywiZXhwIjoxNjgxNDYzNzk3fQ.vci6w5o5moNGsuCrtlwtBcwPDkwt9UoYZe6X_9g5pp8",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tweets",
+			"item": [
+				{
+					"name": "tweetsAll",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNlcmhhdCIsInJvbGVuYW1lIjoidXNlciIsImlhdCI6MTY4MTM3NzM5NywiZXhwIjoxNjgxNDYzNzk3fQ.vci6w5o5moNGsuCrtlwtBcwPDkwt9UoYZe6X_9g5pp8",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:9000/api/tweet/",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"tweet",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tweetgetID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNlcmhhdCIsInJvbGVuYW1lIjoidXNlciIsImlhdCI6MTY4MTM3NzM5NywiZXhwIjoxNjgxNDYzNzk3fQ.vci6w5o5moNGsuCrtlwtBcwPDkwt9UoYZe6X_9g5pp8",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "localhost:9000/api/tweet/8",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"tweet",
+								"8"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tweetPost",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNlcmhhdCIsInJvbGVuYW1lIjoidXNlciIsImlhdCI6MTY4MTM3NzM5NywiZXhwIjoxNjgxNDYzNzk3fQ.vci6w5o5moNGsuCrtlwtBcwPDkwt9UoYZe6X_9g5pp8",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 1,\r\n    \"content\": \"selammm-naber\",\r\n    \"createdAt\": \"2023-04-13 08:18:21\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9000/api/tweet/",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"tweet",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tweetPut",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNlcmhhdCIsInJvbGVuYW1lIjoidXNlciIsImlhdCI6MTY4MTM3NzM5NywiZXhwIjoxNjgxNDYzNzk3fQ.vci6w5o5moNGsuCrtlwtBcwPDkwt9UoYZe6X_9g5pp8",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\": 1,\r\n    \"username\": \"meltem\",\r\n    \"tweetId\": 7,\r\n    \"content\": \"selammm-naber-putladım\",\r\n    \"createdAt\": \"2023-04-13 08:18:21\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9000/api/tweet/6",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"tweet",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tweetDelete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNlcmhhdCIsInJvbGVuYW1lIjoidXNlciIsImlhdCI6MTY4MTM3NzM5NywiZXhwIjoxNjgxNDYzNzk3fQ.vci6w5o5moNGsuCrtlwtBcwPDkwt9UoYZe6X_9g5pp8",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n    \"userId\": 1,\r\n    \"username\": \"meltem\",\r\n    \"content\": \"selammm-hava-nasıl-bugunlerde\",\r\n    \"createdAt\": \"2023-04-13 11:01:46\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9000/api/tweet/6",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"tweet",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comments",
+			"item": [
+				{
+					"name": "commentsAll",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "commentgetID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNlcmhhdCIsInJvbGVuYW1lIjoidXNlciIsImlhdCI6MTY4MTM3NzM5NywiZXhwIjoxNjgxNDYzNzk3fQ.vci6w5o5moNGsuCrtlwtBcwPDkwt9UoYZe6X_9g5pp8",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "commentPost",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNlcmhhdCIsInJvbGVuYW1lIjoidXNlciIsImlhdCI6MTY4MTM3NzM5NywiZXhwIjoxNjgxNDYzNzk3fQ.vci6w5o5moNGsuCrtlwtBcwPDkwt9UoYZe6X_9g5pp8",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9000/api/comment/",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"comment",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "commentPut",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNlcmhhdCIsInJvbGVuYW1lIjoidXNlciIsImlhdCI6MTY4MTM3NzM5NywiZXhwIjoxNjgxNDYzNzk3fQ.vci6w5o5moNGsuCrtlwtBcwPDkwt9UoYZe6X_9g5pp8",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9000/api/comment/",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"comment",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "commentDelete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNlcmhhdCIsInJvbGVuYW1lIjoidXNlciIsImlhdCI6MTY4MTM3NzM5NywiZXhwIjoxNjgxNDYzNzk3fQ.vci6w5o5moNGsuCrtlwtBcwPDkwt9UoYZe6X_9g5pp8",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9000/api/comment/",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"comment",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

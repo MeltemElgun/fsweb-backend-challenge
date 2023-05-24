@@ -4,7 +4,7 @@
   "description": "Tebrikler, Backend konularını tamamladın.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cross-env NODE_ENV=testing jest --verbose --runInBand --silent",
     "server": "nodemon index",
     "start": "node index",
     "migrate": "knex migrate:latest",
@@ -17,11 +17,19 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "express": "^4.18.2",
+    "helmet": "^6.1.2",
+    "jsonwebtoken": "^9.0.0",
     "knex": "^2.4.2",
     "sqlite3": "^5.1.6"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "@types/jest": "^29.5.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
+    "jest": "^29.5.0",
+    "nodemon": "^2.0.22",
+    "supertest": "^6.3.3"
   }
 }
