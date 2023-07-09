@@ -12,49 +12,43 @@ exports.seed = async function (knex) {
   await knex("roles").insert([{ rolename: "admin" }, { rolename: "user" }]);
   await knex("users").insert([
     {
-      username: "meltem",
+      name: "meltem",
+      username: "meltemElgun",
       email: "meltem@gmail.com",
       passhash: "$2a$08$rwP4o8GubsVx9APa7/2DUOPUbG9so7S96BBRT1hrWE5ShaQC4t5ka", //12aa*
+      profilePicture: "ben.jpg",
+      headerPicture: "ben.jpg",
+      accessToken:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1lbHRlbUVsZ3VuIiwicm9sZW5hbWUiOiJhZG1pbiIsImlhdCI6MTY4NzQyMjc0NCwiZXhwIjoxNjg3NTA5MTQ0fQ.fVovKkuh-Orj4JDLbFY6udZ6d3PT5IRy1paOqj25Xh8",
       roleId: 1,
     },
     {
+      name: "serhat",
       username: "serhat",
       email: "serhat@gmail.com",
       passhash: "$2a$08$QebK3M7qXcWMtGU0f3nngejBJduFKSvjOPvf2qJ6ikq0kNwNv3fzC", //12ab*
-      roleId: 2,
-    },
-    {
-      username: "buse",
-      email: "buse@gmail.com",
-      passhash: "$2a$08$BduRnviv3vZhE6hRcb307eMf8Z4rH2l0XF9AAhifgwxgkIMxSZdzK", //12ac*
-      roleId: 2,
-    },
-    {
-      username: "taylan",
-      email: "taylan@gmail.com",
-      passhash: "$2a$08$dbohNGyJjs0zj6dXWHr5COFR/N6rq1yseFLoa.Ra8UW9woPkHwClO", //12ad*
+      profilePicture: "ben.jpg",
+      headerPicture: "ben.jpg",
+      accessToken:
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNlcmhhdCIsInJvbGVuYW1lIjoidXNlciIsImlhdCI6MTY4NzQyMzI4MCwiZXhwIjoxNjg3NTA5NjgwfQ.1SELZE2qz2zQ8n_oTieZ6Qslgcc9lElxvVRq1MbMMaU",
       roleId: 2,
     },
   ]);
 
   await knex("tweets").insert([
-    { content: "selammm", userId: 1 },
-    { content: "günaydın", userId: 1 },
-    { content: "naber", userId: 2 },
-    { content: "hello", userId: 3 },
-    { content: "hallo", userId: 3 },
+    { image: "ben.jpg", content: "selammm", userId: 1 },
+    { image: "ben.jpg", content: "günaydın", userId: 1 },
+    { image: "ben.jpg", content: "naber", userId: 2 },
   ]);
 
   await knex("comments").insert([
     { text: "harikasın", userId: 1, tweetId: 1 },
     { text: "kendine iyi bak", userId: 1, tweetId: 2 },
-    { text: "gönderini beğendim", userId: 2, tweetId: 2 },
-    { text: "sana katılıyorum", userId: 3, tweetId: 2 },
   ]);
 
   await knex("followers").insert([
     { followerId: 1, followingId: 2 },
-    { followerId: 1, followingId: 3 },
-    { followerId: 2, followingId: 3 }, //takipci takipeden
+    { followerId: 1, followingId: 1 },
+    { followerId: 2, followingId: 1 }, //takipci takipeden
   ]);
 };
