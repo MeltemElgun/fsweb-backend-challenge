@@ -28,7 +28,7 @@ server.use("/api/comment", mw.restricted, commentRouter);
 server.use((err, req, res, next) => {
   res.status(err.status || 500).json({
     message: err.message,
-    customMessage: "Server.js tatafından handle edildi bu hata",
+    customMessage: "Server.js tarafından handle edildi bu hata",
   });
 });
 
