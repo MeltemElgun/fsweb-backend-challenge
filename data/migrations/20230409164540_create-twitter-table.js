@@ -2,6 +2,9 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
+
+const defaultPicture = "./ben.jpg";
+const headerPicture = "./ben.jpg";
 exports.up = function (knex) {
   return knex.schema
     .createTable("roles", (tbl) => {
@@ -10,9 +13,13 @@ exports.up = function (knex) {
     })
     .createTable("users", (users) => {
       users.increments("userId");
+      users.string("name", 255).notNullable();
       users.string("username", 255).notNullable().unique();
       users.string("email", 255).notNullable();
       users.string("passhash", 40).notNullable();
+      users.string("profilePicture").defaultTo(defaultPicture);
+      users.string("headerPicture").defaultTo(headerPicture);
+      users.string("accessToken").defaultTo("");
       users.timestamp("createdAt").defaultTo(knex.fn.now());
       users
         .integer("roleId")
@@ -27,6 +34,7 @@ exports.up = function (knex) {
 
     .createTable("tweets", (tweet) => {
       tweet.increments("tweetId");
+      tweet.string("image");
       tweet.string("content", 140).notNullable();
       tweet.timestamp("createdAt").defaultTo(knex.fn.now());
       tweet
