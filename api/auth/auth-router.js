@@ -4,6 +4,15 @@ const userModel = require("../users/user-modele");
 const bcryptjs = require("bcryptjs");
 const utils = require("../../secret/utils");
 
+router.get("/", mw.isValidToken, async (req, res, next) => {
+  try {
+    const usermodel = await userModel.getAll();
+    res.status(201).json(usermodel);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.post(
   "/register",
   mw.validatePayload,
