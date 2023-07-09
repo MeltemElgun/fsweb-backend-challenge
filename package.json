@@ -22,6 +22,9 @@
     "helmet": "^6.1.2",
     "jsonwebtoken": "^9.0.0",
     "knex": "^2.4.2",
+    "moment": "^2.29.4",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.13.0",
     "sqlite3": "^5.1.6"
   },
   "devDependencies": {
