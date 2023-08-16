@@ -1,4 +1,4 @@
-const db = require("./data/db-config");
+const db = require("../data/db-config");
 
 const usersModel = require("./api/users/user-modele");
 const tweetModel = require("./api/tweets/tweet-model");
