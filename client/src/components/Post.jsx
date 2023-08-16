@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import moment from "moment";
+
 import { BsThreeDots } from "react-icons/bs";
 import { RiChat1Line } from "react-icons/ri";
 import { BiRepost } from "react-icons/bi";
