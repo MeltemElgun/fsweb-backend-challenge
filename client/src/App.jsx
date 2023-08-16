@@ -4,6 +4,7 @@ import "./App.css";
 import Leftbar from "./components/Leftbar";
 import Home from "./pages/Home/Home";
 import Rightbar from "./components/Rightbar";
+import Login from "./components/Login";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <div className="flex flex-auto justify-between">
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
             </Routes>
             <Rightbar className="overflow-auto" />
           </div>
