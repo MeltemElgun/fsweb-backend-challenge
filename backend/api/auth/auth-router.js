@@ -34,14 +34,13 @@ router.post(
 
 router.post(
   "/login",
-  mw.validatePayload,
   mw.usernameCheck,
   mw.passwordCheck,
   async (req, res, next) => {
     try {
       const payload = {
         username: req.body.username,
-        rolename: req.body.rolename,
+        passhash: req.body.passhash,
       };
       const token = utils.createUserToken(payload, "1d");
       res.json({
