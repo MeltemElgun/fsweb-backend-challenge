@@ -6,7 +6,7 @@ const utils = require("../../secret/utils");
 
 router.get("/", mw.isValidToken, async (req, res, next) => {
   try {
-    const usermodel = await userModel.getAll();
+    const usermodel = await userModel.getAllUsers();
     res.status(201).json(usermodel);
   } catch (error) {
     next(error);
@@ -46,6 +46,7 @@ router.post(
       res.json({
         message: `welcome ${payload.username}`,
         token: token,
+        username: payload.username,
       });
     } catch (error) {
       next(error);
