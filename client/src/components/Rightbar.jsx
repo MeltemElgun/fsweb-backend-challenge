@@ -12,7 +12,7 @@ export default function Rightbar() {
         />
       </div>
 
-      <div className="mt-4 bg-gray-100 p-5  w-[22rem] rounded-xl">
+      <div className="mt-4 bg-gray-100 p-5  w-[22rem] rounded-3xl">
         <h3 className="text-xl text-black font-bold font-[inherit]">
           İlgini çekebilecek gündemler
         </h3>
