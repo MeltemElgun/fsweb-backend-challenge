@@ -18,7 +18,7 @@ export default function Feed() {
   console.log();
   const localTokenCheck = async () => {
     await axios
-      .get("https://twitter-backend-ac6l.onrender.com/api/auth", {
+      .get("http://localhost:9000/api/auth", {
         headers: {
           Authorization: `${localToken?.token}`,
         },
@@ -36,7 +36,7 @@ export default function Feed() {
     try {
       await axios
         .post(
-          "https://twitter-backend-ac6l.onrender.com/api/tweet/",
+          "http://localhost:9000/api/tweet/",
           {
             content: tweetContent.content,
             image: tweetContent.image,
@@ -63,7 +63,7 @@ export default function Feed() {
   const getTweet = async () => {
     try {
       await axios
-        .get("https://twitter-backend-ac6l.onrender.com/api/tweet/", {
+        .get("http://localhost:9000/api/tweet/", {
           headers: {
             Authorization: `${localToken?.token}`,
             "Content-Type": "application/json",

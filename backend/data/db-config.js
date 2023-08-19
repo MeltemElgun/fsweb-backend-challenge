@@ -1,4 +1,4 @@
-const knex = require("knex")("production");
+const knex = require("knex");
 const knexConfig = require("../knexfile.js");
 const { NODE_ENV } = require("../secret/secretToken.js");
 

@@ -9,7 +9,7 @@ export default function Login() {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
-  const API_URL = "https://twitter-backend-ac6l.onrender.com/api/auth/login";
+  const API_URL = "http://localhost:9000/api/auth/login";
 
   const handleLogIn = async (e) => {
     e.preventDefault();
