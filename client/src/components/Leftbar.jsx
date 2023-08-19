@@ -16,10 +16,15 @@ export default function Leftbar() {
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
   const [dialogVisibility, setDialogVisibility] = useState(false);
-
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log(user);
+  const handleLogout = () => {
+    localStorage.removeItem("user"); // Kullanıcıyı localStorage'dan kaldır
+    navigate("/login"); // çıkış yapınca login yönlendir
+  };
   return (
-    <div className=" ml-7">
-      <div className="max-w-[70px] sm:max-w-[70rem] md:max-w-[75rem] lg:max-w-[70rem] fixed sm:flex sm:flex-col   overflow-y-auto h-full ">
+    <div className=" ml-9   ">
+      <div className="max-w-[70px] sm:max-w-[70rem] md:max-w-[75rem] lg:max-w-[70rem] fixed sm:flex sm:flex-col border-r-[1px]   h-full ">
         <div className="sm:hover:rounded-full sm:hover:bg-slate-200  ">
           <BsTwitter
             className="text-sky-500 text-2xl cursor-pointer mx-3 h-12 w-7"
@@ -29,7 +34,7 @@ export default function Leftbar() {
         <div className="my-1.1 flex flex-col   sm:items-start ">
           <Link
             to="/"
-            className="flex  p-3 text-xl mt-2 font-bold  rounded-full hover:bg-slate-600 hover:bg-opacity-10 hover:text-blue"
+            className="flex  pl-3 pt-2 text-xl mt-1 font-bold  rounded-full hover:bg-slate-600 hover:bg-opacity-10 hover:text-blue"
           >
             <BiHomeCircle className="h-8 w-8 " />
 
@@ -40,7 +45,7 @@ export default function Leftbar() {
 
           <Link
             to="/explore"
-            className="mt-1 group flex  p-3 text-xl leading-8 font-bold rounded-full hover:bg-slate-600 hover:bg-opacity-10 hover:text-blue"
+            className="mt-1 group flex  pl-3 pt-2 text-xl leading-8 font-bold rounded-full hover:bg-slate-600 hover:bg-opacity-10 hover:text-blue"
           >
             <BiSearch className="h-9 w-7" />
             <p className="hidden xl:inline-block mx-5 text-start  font-normal">
@@ -50,7 +55,7 @@ export default function Leftbar() {
 
           <Link
             to="/notifications"
-            className="mt-1 group flex  p-3 text-xl leading-8 font-bold rounded-full hover:bg-slate-600 hover:bg-opacity-10 hover:text-blue"
+            className="mt-1 group flex  pl-3 pt-2 text-xl leading-8 font-bold rounded-full hover:bg-slate-600 hover:bg-opacity-10 hover:text-blue"
           >
             <GrNotification className="h-9 w-6" />
             <p className="hidden xl:inline-block mx-5 text-start  font-normal">
@@ -60,7 +65,7 @@ export default function Leftbar() {
 
           <Link
             to="/messages"
-            className="mt-1  flex  p-3 text-xl leading-8 font-bold rounded-full hover:bg-slate-600 hover:bg-opacity-10 hover:text-blue"
+            className="mt-1  flex  pl-3 pt-2 text-xl leading-8 font-bold rounded-full hover:bg-slate-600 hover:bg-opacity-10 hover:text-blue"
           >
             <HiOutlineMail className="h-9 w-7 " />
             <p className="hidden xl:inline-block mx-5 text-start  font-normal ">
@@ -70,7 +75,7 @@ export default function Leftbar() {
 
           <Link
             to="/bookmarks"
-            className="mt-1 group flex  p-3 text-xl leading-8 font-bold rounded-full hover:bg-slate-600 hover:bg-opacity-10 hover:text-blue"
+            className="mt-1 group flex  pl-3 pt-2 text-xl leading-8 font-bold rounded-full hover:bg-slate-600 hover:bg-opacity-10 hover:text-blue"
           >
             <MdOutlineFeaturedPlayList className="h-9 w-7" />
             <p className="hidden xl:inline-block mx-5 text-start  font-normal">
@@ -79,7 +84,7 @@ export default function Leftbar() {
           </Link>
           <Link
             to="/bookmarks"
-            className="mt-1 group flex  p-3 text-xl leading-8 font-bold rounded-full hover:bg-slate-600 hover:bg-opacity-10 hover:text-blue"
+            className="mt-1 group flex  pl-3 pt-2 text-xl leading-8 font-bold rounded-full hover:bg-slate-600 hover:bg-opacity-10 hover:text-blue"
           >
             <BsBookmark className="h-9 w-6" />
             <p className="hidden xl:inline-block mx-5 text-start  font-normal">
@@ -88,7 +93,7 @@ export default function Leftbar() {
           </Link>
           <Link
             to="/bookmarks"
-            className="mt-1 group flex  p-3 text-xl leading-8 font-bold rounded-full hover:bg-slate-600 hover:bg-opacity-10 hover:text-blue"
+            className="mt-1 group flex  pl-3 pt-2 text-xl leading-8 font-bold rounded-full hover:bg-slate-600 hover:bg-opacity-10 hover:text-blue"
           >
             <VerifiedIcon className="text-slate-400 h-9 w-7 " />
             <p className="hidden xl:inline-block mx-5 text-start  font-normal ">
@@ -98,7 +103,7 @@ export default function Leftbar() {
 
           <Link
             to="/profile"
-            className="mt-1 group flex  p-3 text-xl leading-8 font-bold rounded-full hover:bg-slate-600 hover:bg-opacity-10 hover:text-blue"
+            className="mt-1 group flex  pl-3 pt-2 text-xl leading-8 font-bold rounded-full hover:bg-slate-600 hover:bg-opacity-10 hover:text-blue"
           >
             <BsPerson className="h-8 w-8" />
             <p className="hidden xl:inline-block mx-5 text-start  font-normal">
@@ -107,7 +112,7 @@ export default function Leftbar() {
           </Link>
           <Link
             to="/profile"
-            className="mt-1 group flex  p-3 text-xl leading-8 font-bold rounded-full hover:bg-slate-600 hover:bg-opacity-10 hover:text-blue"
+            className="mt-1 group flex  pl-3 pt-2 text-xl leading-8 font-bold rounded-full hover:bg-slate-600 hover:bg-opacity-10 hover:text-blue"
           >
             <CgMoreO className="h-9 w-7" />
             <p className="hidden xl:inline-block mx-5 text-start  font-normal">
@@ -118,12 +123,14 @@ export default function Leftbar() {
 
         <div>
           <button className="  bg-sky-500 text-white  xl:mt-4  xl:mr-6 hover:bg-sky-500 bg-opacity-90 font-bold  py-2 px-3 xl:py-4 xl:px-16 rounded-full focus:outline-none">
-            <p className="hidden xl:inline-block mx-5 text-center ">Tweetle</p>
+            <p className="hidden xl:inline-block mx-5 text-center text-base ">
+              Gönder
+            </p>
             <BiPencil className="inline-block xl:hidden h-9 w-7 text-white   rounded-full focus:outline-none " />
           </button>
         </div>
 
-        <div className="flex flex-col hover:bg-blue-00 rounded-full pl-2 xl:p-3 my-4   hover:bg-slate-600 hover:bg-opacity-10 hover:text-blue">
+        <div className="flex flex-col hover:bg-blue-00 rounded-full pl-2 xl:p-3 mt-24   hover:bg-slate-600 hover:bg-opacity-10 hover:text-blue relative">
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="flex flex-col flex-shrink-0 group focus:outline-none"
@@ -139,12 +146,12 @@ export default function Leftbar() {
               <div className="ml-3">
                 <div className="flex">
                   <p className="hidden xl:inline-block text-base leading-6 font-bold">
-                    meltemElgün
+                    {user?.username}
                   </p>
                   <IoIosLock className="mt-1 hidden xl:inline-block" />
                 </div>
                 <p className="hidden xl:inline-block text-sm leading-5 font-medium text-gray-600 transition ease-in-out duration-150">
-                  @meltemElgün
+                  @{user?.username}
                 </p>
               </div>
               <div>
@@ -155,13 +162,17 @@ export default function Leftbar() {
         </div>
 
         {menuOpen && (
-          <div className=" top-[2rem] right-0 w-60 border bg-white shadow-lg rounded-md">
+          <div className="bottom-0  right-0 w-60 border bg-white shadow-lg rounded-2xl absolute transform translate-y-[-70%]  translate-x-[60%]  xl:translate-y-[-60%] xl:translate-x-[0%]">
             <ul className="py-2">
-              <li className="px-4 py-2 hover:bg-gray-100">
+              <li className="px-6 py-2 hover:bg-gray-100">
                 <Link to="/">Var olan bir hesap ekle</Link>
               </li>
-              <li className="px-4 py-2 hover:bg-gray-100">
-                <Link to="/login">{/* <Login /> */}</Link>
+              <li className="px-2 py-2 hover:bg-gray-100">
+                <Link to="/login">
+                  <button type="button" onClick={handleLogout}>
+                    @{user?.username}hesabından çıkış yap
+                  </button>
+                </Link>
               </li>
             </ul>
           </div>
