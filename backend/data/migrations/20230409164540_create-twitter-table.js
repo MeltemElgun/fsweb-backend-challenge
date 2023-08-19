@@ -2,7 +2,7 @@
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }
  */
-
+const defaultImage = "./ben.jpg";
 const defaultPicture = "./ben.jpg";
 const headerPicture = "./ben.jpg";
 exports.up = function (knex) {
@@ -24,7 +24,6 @@ exports.up = function (knex) {
       users
         .integer("roleId")
         .defaultTo(2)
-
         .unsigned()
         .references("roleId")
         .inTable("roles")
@@ -34,7 +33,7 @@ exports.up = function (knex) {
 
     .createTable("tweets", (tweet) => {
       tweet.increments("tweetId");
-      tweet.string("image");
+      tweet.string("image").defaultTo(defaultImage);
       tweet.string("content", 140).notNullable();
       tweet.timestamp("createdAt").defaultTo(knex.fn.now());
       tweet
