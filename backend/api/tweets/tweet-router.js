@@ -19,7 +19,7 @@ router.get("/:tweetId", mw.checkTweetId, async (req, res, next) => {
   }
 });
 
-router.post("/", mw.validatePayload, async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     const newTweets = await tweetModel.createTweet(req.body);
     res.status(201).json(newTweets);
