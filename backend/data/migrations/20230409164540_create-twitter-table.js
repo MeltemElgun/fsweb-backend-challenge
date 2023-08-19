@@ -24,7 +24,7 @@ exports.up = function (knex) {
       users
         .integer("roleId")
         .defaultTo(2)
-        .notNullable()
+
         .unsigned()
         .references("roleId")
         .inTable("roles")
@@ -40,7 +40,6 @@ exports.up = function (knex) {
       tweet
         .integer("userId")
         .unsigned()
-        .notNullable()
         .references("userId")
         .inTable("users")
         .onDelete("CASCADE")
