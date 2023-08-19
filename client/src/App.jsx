@@ -14,7 +14,7 @@ function App() {
           <div className="items-start    md:ml-20 min-w-[6rem] md:min-w-[6rem] xl:min-w-[18rem]">
             <Leftbar />
           </div>
-          <div className="flex flex-auto justify-between">
+          <div className="flex flex-auto justify-between border-r-[1px] ">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
