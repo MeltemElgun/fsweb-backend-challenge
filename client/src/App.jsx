@@ -16,8 +16,8 @@ function App() {
           </div>
           <div className="flex flex-auto justify-between border-r-[1px] ">
             <Routes>
-              <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/" element={<Home />} />
             </Routes>
             <Rightbar className="overflow-auto" />
           </div>
