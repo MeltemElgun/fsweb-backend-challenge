@@ -6,13 +6,13 @@ import Login from "../../components/Login";
 const Home = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (!user) {
-  //     return navigate("/login");
-  //   } else {
-  //     return navigate("/");
-  //   }
-  // }, [user, navigate]);
+  useEffect(() => {
+    if (!user) {
+      return navigate("/login");
+    } else {
+      return navigate("/");
+    }
+  }, [user, navigate]);
 
   return (
     <>
