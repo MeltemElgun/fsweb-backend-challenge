@@ -8,6 +8,7 @@ import { FiUpload } from "react-icons/fi";
 
 const Post = ({ props }) => {
   const [tweet, setTweet] = useState({ ...props });
+  console.log(tweet);
   return (
     <div>
       <div className="hover:bg-gray-100 ease-out border-t-[1px] duration-200 pb-4  border-l w-[calc(100vw-6rem)] mb-2 max-w-[40rem]">
