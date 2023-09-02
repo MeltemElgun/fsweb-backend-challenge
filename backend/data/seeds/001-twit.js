@@ -36,9 +36,9 @@ exports.seed = async function (knex) {
   ]);
 
   await knex("tweets").insert([
-    { image: "ben.jpg", content: "selammm", userId: 1 },
-    { image: "ben.jpg", content: "günaydın", userId: 1 },
-    { image: "ben.jpg", content: "naber", userId: 2 },
+    { image: "ben.jpg", content: "workintech deneme tweete", userId: 1 },
+    { image: "ben.jpg", content: "workinteck deneme", userId: 1 },
+    { image: "ben.jpg", content: "workintech eğitim tweete", userId: 2 },
   ]);
 
   await knex("comments").insert([
