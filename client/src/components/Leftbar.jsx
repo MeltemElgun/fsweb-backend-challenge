@@ -17,14 +17,14 @@ export default function Leftbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dialogVisibility, setDialogVisibility] = useState(false);
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user);
+
   const handleLogout = () => {
     localStorage.removeItem("user"); // Kullanıcıyı localStorage'dan kaldır
     navigate("/login"); // çıkış yapınca login yönlendir
   };
   return (
     <div className=" ml-9   ">
-      <div className="max-w-[70px] sm:max-w-[70rem] md:max-w-[75rem] lg:max-w-[70rem] fixed sm:flex sm:flex-col border-r-[1px]   h-full ">
+      <div className="max-w-[70px] sm:max-w-[70rem] md:max-w-[75rem] lg:max-w-[70rem] fixed sm:flex sm:flex-col border-r-[1px]   h-full overflow-y-auto">
         <div className="sm:hover:rounded-full sm:hover:bg-slate-200  ">
           <BsTwitter
             className="text-sky-500 text-2xl cursor-pointer mx-3 h-12 w-7"
