@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import moment from "moment";
 import { BsThreeDots } from "react-icons/bs";
 import { RiChat1Line } from "react-icons/ri";
@@ -6,9 +7,36 @@ import { BiRepost } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FiUpload } from "react-icons/fi";
 
-const Post = ({ props }) => {
+const Post = ({ props, localToken }) => {
   const [tweet, setTweet] = useState({ ...props });
+  // console.log(tweet);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+  const handleDelete = async () => {
+    try {
+      await axios
+        .post(
+          `https://twitter-backend-ac6l.onrender.com/api/tweet/${tweet.id}`,
+          {
+            headers: {
+              Authorization: `${localToken?.token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((response) => {
+          setTweetContent([...tweets, response.data]);
+
+          console.log(JSON.stringify(response.data));
+        });
+    } catch (error) {
+      // Handle error (e.g., display an error message)
+      console.log(error);
+    }
+  };
   return (
     <div>
       <div className="hover:bg-gray-100 ease-out border-t-[1px] duration-200 pb-4  border-l w-[calc(100vw-6rem)] mb-2 max-w-[40rem]">
@@ -35,7 +63,27 @@ const Post = ({ props }) => {
             </div>
           </div>
           <div>
-            <BsThreeDots className="w-5 h-5" />
+            <div className="relative">
+              <BsThreeDots
+                className="w-5 h-5 cursor-pointer"
+                onClick={toggleDropdown}
+              />
+              {isDropdownOpen && (
+                <div className="absolute right-0 mt-2 py-2 w-40 bg-white border rounded-lg shadow-lg z-10">
+                  {/* Dropdown menu items */}
+                  <p className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
+                    Edit
+                  </p>
+                  <button
+                    onClick={handleDelete}
+                    type="submit"
+                    className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
+                  >
+                    Delete
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 
