@@ -20,6 +20,15 @@ router.get("/:userId", mw.userIdCheck, async (req, res, next) => {
   }
 });
 
+router.get("/:username", async (req, res, next) => {
+  try {
+    const getUserName = await UserModel.getUserByUsername(req.params.username);
+    res.status(200).json(getUserName);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.put("/:id", mw.userIdCheck, async (req, res, next) => {
   try {
     const updateUser = await UserModel.updateUser(req.params.id, req.body);

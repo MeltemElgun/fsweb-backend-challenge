@@ -27,8 +27,8 @@ exports.seed = async function (knex) {
       username: "serhat",
       email: "serhat@gmail.com",
       passhash: "$2a$08$QebK3M7qXcWMtGU0f3nngejBJduFKSvjOPvf2qJ6ikq0kNwNv3fzC", //12ab*
-      profilePicture: "ben.jpg",
-      headerPicture: "ben.jpg",
+      profilePicture: "serhat.jpg",
+      headerPicture: "serhat.jpg",
       accessToken:
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNlcmhhdCIsInJvbGVuYW1lIjoidXNlciIsImlhdCI6MTY4NzQyMzI4MCwiZXhwIjoxNjg3NTA5NjgwfQ.1SELZE2qz2zQ8n_oTieZ6Qslgcc9lElxvVRq1MbMMaU",
       roleId: 2,
@@ -38,7 +38,7 @@ exports.seed = async function (knex) {
   await knex("tweets").insert([
     { image: "ben.jpg", content: "workintech deneme tweete", userId: 1 },
     { image: "ben.jpg", content: "workinteck deneme", userId: 1 },
-    { image: "ben.jpg", content: "workintech eğitim tweete", userId: 2 },
+    { image: "serhat.jpg", content: "workintech eğitim tweete", userId: 2 },
   ]);
 
   await knex("comments").insert([
