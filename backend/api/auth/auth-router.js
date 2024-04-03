@@ -54,6 +54,17 @@ router.post(
   }
 );
 
+router.get("/logout", mw.isValidToken, async (req, res, next) => {
+  try {
+    const token = req.headers.authorization;
+    await userModel.logout(token);
+
+    res.status(200).json({ message: "Çıkış başarılı." });
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.post("/reset_password", (req, res) => {
   res.status(200).json({ message: "reset password çalışıyor" });
 });
