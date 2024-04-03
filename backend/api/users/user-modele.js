@@ -5,7 +5,7 @@ const getAllUsers = () => {
     "userId",
     "name",
     "username",
-    " email",
+    "email",
     "createdAt",
     "profilePicture",
     "headerPicture"
@@ -48,7 +48,13 @@ const getUserByUsername = async (name) => {
 const deleteUser = async (id) => {
   return db("users").where("userId", id).del();
 };
+const logout = async (token) => {
+  const user = await db("users").where("accessToken", token).first();
 
+  if (user) {
+    await db("users").where("userId", user.userId).update({ token: null });
+  }
+};
 const updateUser = async (id, user) => {
   await db("users").where("userId", id).update(user);
   return getUserById(id);
@@ -62,4 +68,5 @@ module.exports = {
   getUserByUsername,
   deleteUser,
   updateUser,
+  logout,
 };
