@@ -10,10 +10,20 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 });
-router.get("/:tweetId", mw.checkTweetId, async (req, res, next) => {
+
+router.get("/:identifier", async (req, res, next) => {
+  const identifier = req.params.identifier;
   try {
-    const getTweetId = await tweetModel.getTweetById(req.params.tweetId);
-    res.status(200).json(getTweetId);
+    // Check if the identifier is a valid tweet ID
+    const tweetId = parseInt(identifier);
+    if (!isNaN(tweetId)) {
+      const getTweetId = await tweetModel.getTweetById(tweetId);
+      res.status(200).json(getTweetId);
+    } else {
+      // If it's not a tweet ID, treat it as a username
+      const getUserName = await tweetModel.getTweetByUsername(identifier);
+      res.status(200).json(getUserName);
+    }
   } catch (error) {
     next(error);
   }
