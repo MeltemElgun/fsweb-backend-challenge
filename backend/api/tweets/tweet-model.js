@@ -35,6 +35,25 @@ const getTweetById = async (id) => {
     .where("t.tweetId", id)
     .first();
 };
+const getTweetByUsername = async (name) => {
+  let nameExist = await db("tweets as t")
+    .leftJoin("users as u", "t.userId", "u.userId")
+    .select(
+      "t.tweetId",
+      "u.userId",
+      "u.name",
+      "u.username",
+      "t.userId",
+      "t.content",
+      "t.createdAt",
+      "u.profilePicture",
+      "u.headerPicture",
+      "t.image"
+    )
+    .where("u.username", name);
+
+  return nameExist;
+};
 const filterByTweet = async (filter) => {
   return await db("tweets as t")
     .leftJoin("users as u", "t.userId", "u.userId")
@@ -64,4 +83,5 @@ module.exports = {
   updateTweet,
   removeTweet,
   filterByTweet,
+  getTweetByUsername,
 };
