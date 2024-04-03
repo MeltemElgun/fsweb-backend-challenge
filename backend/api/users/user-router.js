@@ -10,20 +10,18 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 });
-
-router.get("/:userId", mw.userIdCheck, async (req, res, next) => {
-  try {
-    const getId = await UserModel.getUserById(req.params.userId);
-    res.status(200).json(getId);
-  } catch (error) {
-    next(error);
-  }
-});
-
 router.get("/:username", async (req, res, next) => {
   try {
     const getUserName = await UserModel.getUserByUsername(req.params.username);
     res.status(200).json(getUserName);
+  } catch (error) {
+    next(error);
+  }
+});
+router.get("/:userId", mw.userIdCheck, async (req, res, next) => {
+  try {
+    const getId = await UserModel.getUserById(req.params.userId);
+    res.status(200).json(getId);
   } catch (error) {
     next(error);
   }
