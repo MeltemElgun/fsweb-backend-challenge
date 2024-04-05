@@ -6,40 +6,52 @@ import { RiChat1Line } from "react-icons/ri";
 import { BiRepost } from "react-icons/bi";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FiUpload } from "react-icons/fi";
-
-const Post = ({ props, localToken }) => {
+import { useNavigate } from "react-router-dom";
+import PProfile from "../pages/PProfile";
+const Post = ({ props, token, onDelete, user }) => {
   const [tweet, setTweet] = useState({ ...props });
-  // console.log(tweet);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
+  const navigate = useNavigate();
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+  const localUser = JSON.parse(localStorage.getItem("user"));
+  const selectedUser = {
+    username: tweet.username,
+    token: localUser.token,
+  };
+  const handleButton = async () => {
+    if (tweet.username === localUser.username) {
+      navigate("/profile");
+    } else {
+      {
+        tweet.username && <PProfile selectedUser={selectedUser} />;
+        console.log(<PProfile selectedUser={selectedUser} />);
+      }
+      navigate("/pprofile");
+    }
+  };
   const handleDelete = async () => {
     try {
-      await axios
-        .post(
-          `https://twitter-backend-ac6l.onrender.com/api/tweet/${tweet.id}`,
-          {
-            headers: {
-              Authorization: `${localToken?.token}`,
-              "Content-Type": "application/json",
-            },
-          }
-        )
-        .then((response) => {
-          setTweetContent([...tweets, response.data]);
-
-          console.log(JSON.stringify(response.data));
-        });
+      await axios.delete(
+        `https://twitter-backend-ac6l.onrender.com/api/tweet/${tweet.tweetId}`,
+        {
+          headers: {
+            Authorization: token,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      onDelete(tweet.tweetId);
     } catch (error) {
-      // Handle error (e.g., display an error message)
+      console.error("Error deleting tweet:", error.response);
       console.log(error);
     }
   };
+
   return (
-    <div>
-      <div className="hover:bg-gray-100 ease-out border-t-[1px] duration-200 pb-4  border-l w-[calc(100vw-6rem)] mb-2 max-w-[40rem]">
+    <>
+      <div className="hover:bg-gray-100 pb-4  ease-out border-t-[1px] duration-200  border-l w-[calc(100vw-6rem)]  max-w-[40rem]">
         <div className="flex pl-6 pt-4 w-full   justify-between pr-6">
           <div className="flex">
             <div className=" w-14 h-14 flex">
@@ -50,11 +62,13 @@ const Post = ({ props, localToken }) => {
             </div>
             <div className="pl-3">
               <div className="flex">
-                <p className="font-bold ">{tweet.name}</p>
+                <button onClick={handleButton} className="font-bold ">
+                  {tweet.name}
+                </button>
                 <p className="pl-2">@{tweet.username}</p>
                 <span className="pl-2 pr-2 text-gray-500"> &#8226;</span>
                 <p className="text-gray-500">
-                  {moment(tweet.createdAt).format("MMM D")}
+                  {moment(tweet.createdAt).locale("tr").format("D MMM")}
                 </p>
               </div>
               <div className="">
@@ -62,29 +76,30 @@ const Post = ({ props, localToken }) => {
               </div>
             </div>
           </div>
-          <div>
-            <div className="relative">
-              <BsThreeDots
-                className="w-5 h-5 cursor-pointer"
-                onClick={toggleDropdown}
-              />
-              {isDropdownOpen && (
-                <div className="absolute right-0 mt-2 py-2 w-40 bg-white border rounded-lg shadow-lg z-10">
-                  {/* Dropdown menu items */}
-                  <p className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
-                    Edit
-                  </p>
-                  <button
-                    onClick={handleDelete}
-                    type="submit"
-                    className="px-4 py-2 hover:bg-gray-200 cursor-pointer"
-                  >
-                    Delete
-                  </button>
-                </div>
-              )}
+          {tweet.userId === user.userId && (
+            <div>
+              <div className="relative">
+                <BsThreeDots
+                  className="w-5 h-5 cursor-pointer"
+                  onClick={toggleDropdown}
+                />
+                {isDropdownOpen && (
+                  <div className=" absolute font-bold right-0 mt-2 py-2 w-40 bg-white border rounded-lg shadow-lg z-10">
+                    <button
+                      onClick={handleDelete}
+                      type="submit"
+                      className="px-4 py-2 text-left w-full text-red-700 hover:bg-gray-200 cursor-pointer"
+                    >
+                      Sil
+                    </button>
+                    <p className="px-4 py-2 hover:bg-gray-200 cursor-pointer">
+                      Düzenle
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className="pt-4  px-6 pl-[5.7rem]">
@@ -111,7 +126,7 @@ const Post = ({ props, localToken }) => {
           </ul>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
