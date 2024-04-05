@@ -8,148 +8,188 @@ import { FaPoll } from "react-icons/fa";
 import { TbCalendarTime } from "react-icons/tb";
 import Post from "./Post";
 import { useNavigate } from "react-router-dom";
+
 export default function Feed() {
   const [tweetContent, setTweetContent] = useState({
     content: "",
     image: "",
+    userId: null,
   });
+  const [user, setUser] = useState(null);
+
   const [tweets, setTweets] = useState([]);
 
-  const [localToken, setLocalToken] = useState(
-    JSON.parse(localStorage.getItem("user"))
-  );
+  const [localToken, setLocalToken] = useState(null);
 
-  JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
-  const localTokenCheck = async () => {
-    await axios
-      .get("https://twitter-backend-ac6l.onrender.com/api/auth", {
-        headers: {
-          Authorization: `${localToken?.token}`,
-        },
-      })
-      .then((res) => {
-        res.data && setLocalToken(JSON.parse(localStorage.getItem("user")));
-        console.log(JSON.stringify(res.data));
-      });
-  };
 
+  const getUserIdByUsername = async (username, token) => {
+    try {
+      const response = await axios.get(
+        `https://twitter-backend-ac6l.onrender.com/api/user/${username}`,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
+  const localTokenCheck = async (token) => {
+    try {
+      const response = await axios.get(
+        "https://twitter-backend-ac6l.onrender.com/api/auth",
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      if (response.data) {
+        const userData = await getUserIdByUsername(localUser.username, token);
+        setUser(userData);
+        getTweet(token);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const localUser = JSON.parse(localStorage.getItem("user"));
   useEffect(() => {
-    localToken && localTokenCheck();
-    getTweet();
+    if (localUser) {
+      setLocalToken(localUser.token);
+      localTokenCheck(localUser.token);
+    } else {
+      navigate("/"); // Kullanıcı giriş yapmadıysa ana sayfaya yönlendir
+    }
   }, []);
+
   const handleTweet = async () => {
     try {
-      await axios
-        .post(
+      const userData = await getUserIdByUsername(
+        localUser.username,
+        localToken
+      );
+
+      if (userData.userId) {
+        const response = await axios.post(
           "https://twitter-backend-ac6l.onrender.com/api/tweet/",
           {
             content: tweetContent.content,
             image: tweetContent.image,
-            userId: 1,
+            userId: userData.userId,
           },
           {
             headers: {
-              Authorization: `${localToken?.token}`,
+              Authorization: localToken,
               "Content-Type": "application/json",
             },
           }
-        )
-        .then((response) => {
-          setTweetContent([...tweets, response.data]);
+        );
 
-          console.log(JSON.stringify(response.data));
-        });
+        setTweets([...tweets, response.data]);
+
+        setTweetContent({ content: "", image: "", userId: null }); // tweetContent'i sıfırla
+      } else {
+        console.log("Kullanıcı bulunamadı.");
+      }
     } catch (error) {
-      // Handle error (e.g., display an error message)
       console.log(error);
     }
   };
 
-  // http://localhost:9000
-  const getTweet = async () => {
+  // https://twitter-backend-ac6l.onrender.com
+
+  const getTweet = async (token) => {
     try {
-      await axios
-        .get("https://twitter-backend-ac6l.onrender.com/api/tweet/", {
+      const response = await axios.get(
+        "https://twitter-backend-ac6l.onrender.com/api/tweet/",
+        {
           headers: {
-            Authorization: `${localToken?.token}`,
-            "Content-Type": "application/json",
+            Authorization: token,
           },
-        })
-        .then((response) => {
-          setTweets(response.data);
-          console.log(JSON.stringify(response.data));
-        });
+        }
+      );
+
+      setTweets(response.data);
     } catch (error) {
-      // Handle error (e.g., display an error message)
       console.log(error);
     }
   };
-
+  const handleDeletePost = (tweetId) => {
+    setTweets((prevTweets) =>
+      prevTweets.filter((prevTweet) => prevTweet.tweetId !== tweetId)
+    );
+  };
   return (
     <>
-      {localToken ? (
-        <>
-          <form className="mt-4 mx-8 ">
-            <div className="flex focus-within:border-b-[1px]">
-              <div>
-                <img
-                  className="inline-block h-10 w-10 rounded-full"
-                  src="../ben.jpg"
-                  alt=""
-                />
-              </div>
-              <input
-                value={tweetContent.content}
-                onChange={(e) =>
-                  setTweetContent({ ...tweetContent, content: e.target.value })
-                }
-                placeholder="Neler oluyor?"
-                type="text"
-                className="mx-3 text-xl pb-10 pr-52 outline-none text-left"
-              />
-              {tweetContent.image && <img src={tweetContent.image} alt="" />}
-            </div>
-            <div className="flex items-center justify-between  mt-2 pl-20 pr-4 pb-4">
-              <ul className="flex space-x-5">
-                <li>
-                  <BsImage className="text-[#1d9bf0] w-4 h-4" />
-                </li>
-                <li>
-                  <AiOutlineFileGif className="text-[#1d9bf0] w-5 h-5" />
-                </li>
-                <li className="hidden md:block">
-                  <FaPoll className=" text-[#1d9bf0] w-4 h-4" />
-                </li>
-                <li>
-                  <BsEmojiSmile className="text-[#1d9bf0] w-4 h-4" />
-                </li>
-                <li className="hidden md:block">
-                  <TbCalendarTime className="text-[#1d9bf0] w-5 h-5" />
-                </li>
-                <li>
-                  <IoLocationSharp className="text-[#1d9bf0] w-5 h-5" />
-                </li>
-              </ul>
+      <form className="mt-4 mx-2 md:mx-8  w-[calc(100vw-8rem)]  max-w-[32rem]">
+        <div className="flex focus-within:border-b-[1px]">
+          <div>
+            <img
+              className="inline-block h-10 w-10 rounded-full"
+              src={user ? user.profilePicture : "../ben.jpg"}
+              alt=""
+            />
+          </div>
+          <input
+            value={tweetContent.content}
+            onChange={(e) =>
+              setTweetContent({ ...tweetContent, content: e.target.value })
+            }
+            placeholder="Neler oluyor?"
+            type="text"
+            className="mx-3 text-xl pb-10 md:pr-52 outline-none text-left"
+          />
+          {tweetContent.image && <img src={tweetContent.image} alt="" />}
+        </div>
+        <div className="flex items-center justify-between  mt-2  md:pl-12 pr-4 pb-4">
+          <ul className="flex items-center space-x-2">
+            <li className="flex-none rounded-full px-2 py-1 hover:bg-[#1d9cf01e] hover:bg-opacity-10 ">
+              <BsImage className="text-[#1d9bf0] w-4 h-4" />
+            </li>
+            <li className="flex-none rounded-full px-2 py-1 hover:bg-[#1d9cf01e] hover:bg-opacity-10 ">
+              <AiOutlineFileGif className="text-[#1d9bf0] w-5 h-5" />
+            </li>
+            <li className="flex-none hidden md:block  rounded-full px-2 py-1 hover:bg-[#1d9cf01e] hover:bg-opacity-10 ">
+              <FaPoll className="text-[#1d9bf0] w-4 h-4 " />
+            </li>
+            <li className="flex-none rounded-full px-2 py-1 hover:bg-[#1d9cf01e] hover:bg-opacity-10 ">
+              <BsEmojiSmile className="text-[#1d9bf0] w-4 h-4" />
+            </li>
+            <li className="flex-none rounded-full hidden md:block px-2 py-1 hover:bg-[#1d9cf01e] hover:bg-opacity-10 ">
+              <TbCalendarTime className="text-[#1d9bf0] w-5 h-5" />
+            </li>
+            <li className="flex-none rounded-full px-2 py-1 hover:bg-[#1d9cf01e] hover:bg-opacity-10 ">
+              <IoLocationSharp className="text-[#1d9bf0] w-5 h-5" />
+            </li>
+          </ul>
 
-              <button
-                onClick={handleTweet}
-                type="submit"
-                className="bg-blue-400 text-white py-2 px-5 rounded-full font-bold"
-                // disabled={!tweetContent.trim()} // Disable button when tweetContent is empty or whitespace only
-              >
-                Gönder
-              </button>
-            </div>{" "}
-          </form>
-        </>
-      ) : (
-        <div>{navigate("/")};</div>
-      )}{" "}
+          <button
+            onClick={handleTweet}
+            type="submit"
+            className="bg-blue-400 text-white py-2 px-5 rounded-full font-bold"
+            // disabled={!tweetContent.trim()} // Disable button when tweetContent is empty or whitespace only
+          >
+            Gönder
+          </button>
+        </div>{" "}
+      </form>
+
       {tweets.map((tweet) => {
         return (
-          <div key={tweet.id}>
-            <Post props={tweet} localToken={localToken} />
+          <div key={tweet.tweetId}>
+            <Post
+              props={tweet}
+              token={localUser.token}
+              onDelete={handleDeletePost}
+              user={user}
+            />
           </div>
         );
       })}
