@@ -3,7 +3,7 @@ import { BsSearch } from "react-icons/bs";
 export default function Rightbar() {
   return (
     <div className="hidden lg:inline-block p-6 grow md:py-1  ">
-      <div className=" w-[22rem]  flex items-center bg-gray-100 rounded-full p-3 cursor-text focus:bg-white ">
+      <div className="max-w-[22rem]  flex items-center bg-gray-100 rounded-full p-3 cursor-text focus:bg-white ">
         <BsSearch className="h-5 w-5 cursor-default focus:bg-white" />
         <input
           type="text"
@@ -12,7 +12,7 @@ export default function Rightbar() {
         />
       </div>
 
-      <div className="mt-4 bg-gray-100 p-5  w-[22rem] rounded-3xl">
+      <div className="mt-4 bg-gray-100 p-5  max-w-[22rem] rounded-3xl">
         <h3 className="text-xl text-black font-bold font-[inherit]">
           İlgini çekebilecek gündemler
         </h3>
